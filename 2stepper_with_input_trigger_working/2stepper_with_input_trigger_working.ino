@@ -9,7 +9,7 @@ int maxSpeed = 450;
 
 int IN_A = A0;        // Input pin
 int IN_A_VAL = 0;     
-int threshold = 400;  // input threshold for triggering
+int threshold = 520;  // input threshold for triggering
 bool running = false;
 int s1_target = 50;
 int s2_target = 1200;
@@ -34,8 +34,8 @@ void setup()
 void loop()
 {
   IN_A_VAL = analogRead(IN_A);
-  //Serial.print("val:");
-  //Serial.println(IN_A_VAL);
+  Serial.print("val:");
+  Serial.println(IN_A_VAL);
 
   
   

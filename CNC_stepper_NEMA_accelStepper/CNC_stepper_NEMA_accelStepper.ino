@@ -15,6 +15,7 @@
 
 #define INPUT_1   A1      // Analog pin A1
 #define LED       13      // on-board LED
+#define DIS       12     // D12 pin
 
 int in_1_rdg = 0;
 int in_1_val = 0;
@@ -25,7 +26,7 @@ int Y_STEPS =   200;
 bool Y_AT_MAX = false;
 
 int in_1_active = HIGH; // invert switching
-int in_1_limit = 400;   // Voltage sensed to trigger rdg
+int in_1_limit = 19;   // Voltage sensed to trigger rdg
 
 AccelStepper stepper1(AccelStepper::DRIVER, X_STP, X_DIR);
 AccelStepper stepper2(AccelStepper::DRIVER, Y_STP, Y_DIR);
@@ -36,13 +37,15 @@ void setup()
     //digitalWrite(INPUT_1, HIGH); // pullup resistor
     pinMode(EN, OUTPUT);    // Turn on steppers
     digitalWrite(EN, LOW);
-    //Serial.begin(115200);
+    Serial.begin(115200);
+
+    pinMode(DIS, INPUT);  // Enable as input pin
     
-    stepper1.setMaxSpeed(1000);
+    stepper1.setMaxSpeed(4000);
     stepper1.setAcceleration(100000);
     stepper1.moveTo(X_STEPS);
 
-    stepper2.setMaxSpeed(999999999);
+    stepper2.setMaxSpeed(10000);
     stepper2.setAcceleration(999999999);
     stepper2.moveTo(Y_STEPS);
 }
@@ -86,13 +89,17 @@ void loop()
     }
 
     // disable stepping, re-set home, 
-    if ((enabled) && (in_1_val != in_1_active) && (stepper1.distanceToGo() == 0)){
-        stepper2.stop();
-        stepper1.runToNewPosition(0);
-        stepper2.runToNewPosition(0);
-        digitalWrite(EN, HIGH); // turn off steppers
-        digitalWrite(LED, LOW); // run light off
-        enabled = false;
+    if ((enabled) && 
+        (in_1_val != in_1_active) && 
+        (stepper1.distanceToGo() == 0) && 
+        (digitalRead(DIS) == HIGH)){
+          delay(500);
+          stepper2.stop();
+          stepper1.runToNewPosition(0);
+          stepper2.runToNewPosition(0);
+          digitalWrite(EN, HIGH); // turn off steppers
+          digitalWrite(LED, LOW); // run light off
+          enabled = false;
     }
 
     // do a step if we've got a movement to make
