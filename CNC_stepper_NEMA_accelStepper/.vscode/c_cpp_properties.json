@@ -1,24 +1,17 @@
 {
     "configurations": [
         {
-            "name": "Win32",
+            "name": "osx",
             "includePath": [
                 "${default}",
-                "C:\\Program Files (x86)\\Arduino\\libraries\\**",
-                "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\cores\\arduino\\**",
-                "C:\\Program Files (x86)\\Arduino\\hardware\\tools\\avr\\avr\\include\\**",
-                "C:\\Program Files (x86)\\Arduino\\hardware\\tools\\avr\\lib\\gcc\\avr\\7.3.0\\include\\**",
-                "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\variants\\standard\\**",
-                "C:\\Users\\Conger\\.platformio\\packages\\framework-arduinoststm32\\libraries\\**",
-                "C:\\Users\\Conger\\.platformio\\packages\\framework-arduinoststm32\\cores\\arduino\\**",
-                "C:\\Users\\Conger\\Documents\\Arduino\\libraries\\**",
-                "${workspaceFolder}\\**"
+                "${workspaceFolder}/**",
+                "/Users/Cory/Documents/Arduino/libraries/**"
             ],
             "windowsSdkVersion": "10.0.18362.0",
-            "compilerPath": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.28.29333\\bin\\Hostx64\\x64\\cl.exe",
+            "compilerPath": "/usr/bin/g++",
             "cStandard": "c17",
             "cppStandard": "c++17",
-            "intelliSenseMode": "windows-msvc-x64",
+            "intelliSenseMode": "macos-clang-x64",
             "defines": [
                 "USBCON",
                 "ARDUINO=10816"
